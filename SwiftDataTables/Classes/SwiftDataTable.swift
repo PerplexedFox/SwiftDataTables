@@ -698,10 +698,11 @@ extension SwiftDataTable {
         let cell = DataCell()
         //cell.dataLabel.font.pointSize)
         let header = DataHeaderFooter()
+        let widthPerCharacter = header.titleLabel.font.pointSize
 //        //for font 17
 //        return 14
         //for header font label
-        return header.titleLabel.font.pointSize
+        return widthPerCharacter
     }
     
     func heightForPaginationView() -> CGFloat {
