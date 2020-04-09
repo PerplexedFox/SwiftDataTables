@@ -698,7 +698,7 @@ extension SwiftDataTable {
         let cell = DataCell()
         //cell.dataLabel.font.pointSize)
         let header = DataHeaderFooter()
-        let widthPerCharacter = header.titleLabel.font.pointSize
+        let widthPerCharacter = header.titleLabel.font.pointSize + 2 //bold
 //        //for font 17
 //        return 14
         //for header font label
