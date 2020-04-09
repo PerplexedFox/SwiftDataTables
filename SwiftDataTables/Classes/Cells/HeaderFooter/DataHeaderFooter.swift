@@ -46,7 +46,7 @@ class DataHeaderFooter: UICollectionReusableView {
     }
     
     func setupViews() {
-        titleLabel.adjustsFontSizeToFitWidth = true
+        titleLabel.adjustsFontSizeToFitWidth = false //update
         titleLabel.font = UIFont.systemFont(ofSize: 8, weight: .heavy)
         addSubview(titleLabel)
         addSubview(sortingImageView)
