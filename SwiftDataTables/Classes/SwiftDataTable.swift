@@ -675,7 +675,7 @@ extension SwiftDataTable {
         if index == 0{     //updated //for first column that is sorted
             sortingArrowVisualElementWidth = 20
         }
-        let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacter() + sortingArrowVisualElementWidth
+        let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacterCell() + sortingArrowVisualElementWidth
         return max(averageDataColumnWidth, max(self.minimumColumnWidth(), self.minimumHeaderColumnWidth(index: index)))
     }
     
@@ -689,20 +689,21 @@ extension SwiftDataTable {
     }
     
     func minimumHeaderColumnWidth(index: Int) -> CGFloat {
-        return CGFloat(self.pixelsPerCharacter() * CGFloat(self.dataStructure.headerTitles[index].count))
+        return CGFloat(self.pixelsPerCharacterHeader() * CGFloat(self.dataStructure.headerTitles[index].count))
     }
     
     //There should be an automated way to retrieve the font size of the cell
-    func pixelsPerCharacter() -> CGFloat {
-        
-        let cell = DataCell()
-        //cell.dataLabel.font.pointSize)
+    func pixelsPerCharacterHeader() -> CGFloat {
+
         let header = DataHeaderFooter()
         let widthPerCharacter = header.titleLabel.font.pointSize + 2 //bold
-//        //for font 17
-//        return 14
-        //for header font label
         return widthPerCharacter
+    }
+    
+    func pixelsPerCharacterCell() -> CGFloat {
+            
+            let cell = DataCell()
+            return cell.dataLabel.font.pointSize
     }
     
     func heightForPaginationView() -> CGFloat {
