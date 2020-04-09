@@ -671,7 +671,10 @@ extension SwiftDataTable {
     /// - Returns: The automatic width of the column irrespective of the Data Grid frame width
     func automaticWidthForColumn(index: Int) -> CGFloat {
         let columnAverage: CGFloat = CGFloat(dataStructure.averageDataLengthForColumn(index: index))
-        let sortingArrowVisualElementWidth: CGFloat = 20 // This is ugly
+        var sortingArrowVisualElementWidth: CGFloat = 0 // This is ugly
+        if index == 0{     //updated //for first column that is sorted
+            sortingArrowVisualElementWidth = 20
+        }
         let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacter() + sortingArrowVisualElementWidth
         return max(averageDataColumnWidth, max(self.minimumColumnWidth(), self.minimumHeaderColumnWidth(index: index)))
     }
@@ -691,7 +694,14 @@ extension SwiftDataTable {
     
     //There should be an automated way to retrieve the font size of the cell
     func pixelsPerCharacter() -> CGFloat {
-        return 14
+        
+        let cell = DataCell()
+        //cell.dataLabel.font.pointSize)
+        let header = DataHeaderFooter()
+//        //for font 17
+//        return 14
+        //for header font label
+        return header.titleLabel.font.pointSize
     }
     
     func heightForPaginationView() -> CGFloat {

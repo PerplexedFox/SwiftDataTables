@@ -23,6 +23,7 @@ class DataCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
+        self.dataLabel.font = .systemFont(ofSize: 8)
     }
     
     required init?(coder: NSCoder) {

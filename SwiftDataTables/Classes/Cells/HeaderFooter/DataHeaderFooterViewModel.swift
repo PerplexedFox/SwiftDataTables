@@ -23,8 +23,9 @@ public class DataHeaderFooterViewModel: DataTableSortable {
         switch self.sortType {
         case .hidden:
             return nil
-        case .unspecified:
-            return "column-sort-unspecified"
+        case .unspecified: //updated
+            return nil
+         //   return "column-sort-unspecified"
         case .ascending:
             return "column-sort-ascending"
         case .descending:

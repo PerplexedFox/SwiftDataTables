@@ -17,16 +17,16 @@ public enum DataTableSortType: String {
 }
 
 extension DataTableSortType {
-    mutating func toggle() {
+    mutating func toggle() {//update
         switch self {
         case .hidden:
             break
         case .unspecified:
-            self = .ascending
+            self = .hidden
         case .ascending:
-            self = .descending
-        case .descending:
             self = .ascending
+        case .descending:
+            self = .descending
         }
     }
     

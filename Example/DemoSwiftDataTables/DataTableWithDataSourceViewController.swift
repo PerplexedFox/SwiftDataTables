@@ -74,10 +74,16 @@ class DataTableWithDataSourceViewController: UIViewController {
 }
 extension DataTableWithDataSourceViewController {
     private func makeDataTable() -> SwiftDataTable {
-        let dataTable = SwiftDataTable(dataSource: self)
+        let dataTable = SwiftDataTable(dataSource: self, options: makeOptions())
         dataTable.translatesAutoresizingMaskIntoConstraints = false
         dataTable.delegate = self
         return dataTable
+    }
+    func makeOptions() -> DataTableConfiguration {
+        var options = DataTableConfiguration()
+        options.shouldContentWidthScaleToFillFrame = false
+        options.defaultOrdering = DataTableColumnOrder(index: 0, order: .ascending)
+        return options
     }
 }
 extension DataTableWithDataSourceViewController: SwiftDataTableDataSource {

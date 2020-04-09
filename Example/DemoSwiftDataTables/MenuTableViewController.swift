@@ -175,6 +175,7 @@ extension MenuViewController {
     private func configurationFixedColumns() -> DataTableConfiguration {
         var configuration = DataTableConfiguration()
         configuration.fixedColumns = DataTableFixedColumnType(leftColumns: 1, rightColumns: 1)
+        configuration.defaultOrdering = DataTableColumnOrder(index: 0, order: .ascending)
         return configuration
     }
 }
