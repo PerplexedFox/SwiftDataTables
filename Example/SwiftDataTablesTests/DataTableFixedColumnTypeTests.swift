@@ -8,7 +8,8 @@
 
 import XCTest
 
-@testable import SwiftDataTables_Example
+//@testable import SwiftDataTables_Example
+@testable import SwiftDataTables
 
 class DataTableFixedColumnTypeTests: XCTestCase {
 
