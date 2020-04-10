@@ -313,6 +313,7 @@ public extension SwiftDataTable {
                 data: dataStructure.headerTitles[$0],
                 sortType: dataStructure.columnHeaderSortType(for: $0)
             )
+            headerViewModel.font = self.fontForHeader() //updated
             headerViewModel.configure(dataTable: self, columnIndex: $0)
             return headerViewModel
         }
@@ -376,6 +377,7 @@ extension SwiftDataTable: UICollectionViewDataSource, UICollectionViewDelegate {
         //else {
         cellViewModel = self.rowModel(at: indexPath)
         //}
+        cellViewModel.font = self.fontForCell()
         let cell = cellViewModel.dequeueCell(collectionView: collectionView, indexPath: indexPath)
         return cell
     }
@@ -594,6 +596,15 @@ extension SwiftDataTable {
         return self.dataStructure.footerTitles.count
     }
     
+    func fontForCell() -> UIFont{
+        return self.delegate?.fontForCell?(in: self) ?? self.options.cellFont
+    }
+    
+    func fontForHeader() -> UIFont{
+        let font = self.delegate?.fontForHeader?(in: self) ?? self.options.headerFont
+        return self.delegate?.fontForHeader?(in: self) ?? self.options.headerFont
+    }
+    
     func shouldContentWidthScaleToFillFrame() -> Bool{
         return self.delegate?.shouldContentWidthScaleToFillFrame?(in: self) ?? self.options.shouldContentWidthScaleToFillFrame
     }
@@ -689,21 +700,22 @@ extension SwiftDataTable {
     }
     
     func minimumHeaderColumnWidth(index: Int) -> CGFloat {
+        if CGFloat(dataStructure.averageDataLengthForColumn(index: index)) <= 50{ //updated
+            return CGFloat(self.pixelsPerCharacterHeader() * CGFloat(self.dataStructure.headerTitles[index].count))+20
+        } else{
         return CGFloat(self.pixelsPerCharacterHeader() * CGFloat(self.dataStructure.headerTitles[index].count))
+        }
     }
     
     //There should be an automated way to retrieve the font size of the cell
     func pixelsPerCharacterHeader() -> CGFloat {
-
         let header = DataHeaderFooter()
-        let widthPerCharacter = header.titleLabel.font.pointSize + 2 //bold
-        return widthPerCharacter
+        return header.titleLabel.font.pointSize + header.titleLabel.font.pointSize * 0.4 //heavy
     }
     
     func pixelsPerCharacterCell() -> CGFloat {
-            
-            let cell = DataCell()
-            return cell.dataLabel.font.pointSize
+        let cell = DataCell()
+        return cell.dataLabel.font.pointSize
     }
     
     func heightForPaginationView() -> CGFloat {

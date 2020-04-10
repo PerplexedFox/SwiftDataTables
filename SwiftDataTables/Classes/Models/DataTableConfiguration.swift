@@ -50,6 +50,9 @@ public struct DataTableConfiguration: Equatable {
     
     public var fixedColumns: DataTableFixedColumnType? = nil
     
+    public var headerFont: UIFont = .systemFont(ofSize: 17, weight: .heavy)
+    public var cellFont: UIFont = .systemFont(ofSize: 17)
+    
     public init(){
         
     }

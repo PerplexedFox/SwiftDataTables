@@ -11,6 +11,7 @@ import UIKit
 class DataCell: UICollectionViewCell {
 
     //MARK: - Properties
+
     private enum Properties {
         static let verticalMargin: CGFloat = 5
         static let horizontalMargin: CGFloat = 15
@@ -18,12 +19,12 @@ class DataCell: UICollectionViewCell {
     }
     
     let dataLabel = UILabel()
-    
+        
     //MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
-        self.dataLabel.font = .systemFont(ofSize: 8)
+        self.dataLabel.font =  .systemFont(ofSize: 13) //updated // no need in this
     }
     
     required init?(coder: NSCoder) {
@@ -42,7 +43,10 @@ class DataCell: UICollectionViewCell {
         ])
     }
     
-    func configure(_ viewModel: DataCellViewModel){
+    func configure(_ viewModel: DataCellViewModel, font: UIFont? = nil){ //updated
+        if font != nil{
+            self.dataLabel.font = font
+        }
         self.dataLabel.text = viewModel.data.stringRepresentation
 //        self.contentView.backgroundColor = .white
     }

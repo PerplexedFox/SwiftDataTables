@@ -18,6 +18,8 @@ open class DataCellViewModel: VirtualPositionTrackable, CollectionViewCellRepres
     public let data: DataTableValueType
     var highlighted: Bool = false
     //
+    var font: UIFont? = nil
+    
     public var stringRepresentation: String {
         return self.data.stringRepresentation
     }
@@ -38,7 +40,7 @@ open class DataCellViewModel: VirtualPositionTrackable, CollectionViewCellRepres
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? DataCell else {
             fatalError("error in collection view cell")
         }
-        cell.configure(self)
+        cell.configure(self, font: self.font)
         return cell
     }
 }

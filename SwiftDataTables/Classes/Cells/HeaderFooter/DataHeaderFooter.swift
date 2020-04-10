@@ -46,10 +46,11 @@ class DataHeaderFooter: UICollectionReusableView {
     }
     
     func setupViews() {
-        titleLabel.adjustsFontSizeToFitWidth = false //update
-        titleLabel.font = UIFont.systemFont(ofSize: 8, weight: .heavy)
+        titleLabel.adjustsFontSizeToFitWidth = false //updated
+        titleLabel.font = UIFont.systemFont(ofSize: 13, weight: .heavy)
         addSubview(titleLabel)
         addSubview(sortingImageView)
+        //updated
    //     let tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(DataHeaderFooter.didTapView))
    //     addGestureRecognizer(tapGesture)
     }
@@ -70,7 +71,11 @@ class DataHeaderFooter: UICollectionReusableView {
         ])
     }
     
-    func configure(viewModel: DataHeaderFooterViewModel) {
+    func configure(viewModel: DataHeaderFooterViewModel, font: UIFont? = nil) { //updated
+        if font != nil {
+        self.titleLabel.font = font
+        }
+        
         self.titleLabel.text = viewModel.data
         self.sortingImageView.image = viewModel.imageForSortingElement
         self.sortingImageView.tintColor = viewModel.tintColorForSortingElement

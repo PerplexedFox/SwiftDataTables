@@ -47,6 +47,7 @@ class SwiftDataTableLayout: UICollectionViewFlowLayout {
         var xOffsets = [CGFloat]()
         var yOffsets = [CGFloat]()
         
+        
         //Reduces the computation by working out one column
         for column in 0..<self.dataTable.numberOfColumns() {
             let currentColumnXOffset = Array(0..<column).reduce(self.dataTable.widthForRowHeader()) {

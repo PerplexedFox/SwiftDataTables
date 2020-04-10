@@ -102,6 +102,9 @@ extension DataTableWithDataSourceViewController: SwiftDataTableDataSource {
     public func dataTable(_ dataTable: SwiftDataTable, dataForRowAt index: NSInteger) -> [DataTableValueType] {
         return self.dataSource[index]
     }
+    func fontForCell(in dataTable: SwiftDataTable) -> UIFont {
+        return .systemFont(ofSize: 13)
+    }
 }
 
 extension DataTableWithDataSourceViewController: SwiftDataTableDelegate {

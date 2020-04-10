@@ -17,6 +17,8 @@ public class DataHeaderFooterViewModel: DataTableSortable {
     var indexPath: IndexPath! // Questionable
     var dataTable: SwiftDataTable!
     
+    var font: UIFont? = nil
+    
     public var sortType: DataTableSortType
     
     var imageStringForSortingElement: String? {
@@ -80,8 +82,8 @@ extension DataHeaderFooterViewModel: CollectionViewSupplementaryElementRepresent
             else {
                 return UICollectionReusableView()
         }
-        
-        headerView.configure(viewModel: self)
+
+        headerView.configure(viewModel: self, font: font)
         switch kind {
         case SwiftDataTable.SupplementaryViewType.columnHeader.rawValue:
             headerView.didTapEvent = { [weak self] in

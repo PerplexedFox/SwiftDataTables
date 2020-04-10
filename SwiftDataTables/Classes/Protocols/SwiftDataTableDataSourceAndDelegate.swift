@@ -149,6 +149,18 @@ public protocol SwiftDataTableDataSource: class {
     /// - Returns: whether or not the horizontal scroll bars should be shown.
     @objc optional func shouldShowHorizontalScrollBars(in dataTable: SwiftDataTable) -> Bool
     
+    /// Control the font for headers.
+    ///
+    /// - Parameter dataTable: SwiftDataTable
+    /// - Returns: the font of the header
+    @objc optional func fontForHeader(in dataTable: SwiftDataTable) -> UIFont
+    
+    /// Control the font for cells.
+    ///
+    /// - Parameter dataTable: SwiftDataTable
+    /// - Returns: the font of the header
+    @objc optional func fontForCell(in dataTable: SwiftDataTable) -> UIFont
+    
     /// Control the background color for cells in rows intersecting with a column that's highlighted.
     ///
     /// - Parameters:
