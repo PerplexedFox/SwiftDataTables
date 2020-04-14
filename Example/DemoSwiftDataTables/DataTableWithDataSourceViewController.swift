@@ -102,12 +102,6 @@ extension DataTableWithDataSourceViewController: SwiftDataTableDataSource {
     public func dataTable(_ dataTable: SwiftDataTable, dataForRowAt index: NSInteger) -> [DataTableValueType] {
         return self.dataSource[index]
     }
-    func fontForCell(in dataTable: SwiftDataTable) -> UIFont {
-        return .systemFont(ofSize: 13)
-    }
-    func fontForHeader(in dataTable: SwiftDataTable) -> UIFont {
-        return .systemFont(ofSize: 13, weight: .heavy)
-    }
 }
 
 extension DataTableWithDataSourceViewController: SwiftDataTableDelegate {
@@ -115,19 +109,22 @@ extension DataTableWithDataSourceViewController: SwiftDataTableDelegate {
         debugPrint("did select item at indexPath: \(indexPath) dataValue: \(dataTable.data(for: indexPath))")
     }
     
+    func fontForCell(in: SwiftDataTable) -> UIFont {
+        return .systemFont(ofSize: 13)
+    }
     
-       func dataTable(_ dataTable: SwiftDataTable, highlightedColorForRowIndex at: Int) -> UIColor {
-           if at.isMultiple(of: 2){
-               return .gray
-           } else{
-               return .white
-           }
-       }
-       func dataTable(_ dataTable: SwiftDataTable, unhighlightedColorForRowIndex at: Int) -> UIColor {
-           if at.isMultiple(of: 2){
-               return .lightGray
-           } else{
-               return .white
-           }
-       }
+    func dataTable(_ dataTable: SwiftDataTable, highlightedColorForRowIndex at: Int) -> UIColor {
+        if at.isMultiple(of: 2){
+            return .gray
+        } else{
+            return .white
+        }
+    }
+    func dataTable(_ dataTable: SwiftDataTable, unhighlightedColorForRowIndex at: Int) -> UIColor {
+        if at.isMultiple(of: 2){
+            return .lightGray
+        } else{
+            return .white
+        }
+    }
 }

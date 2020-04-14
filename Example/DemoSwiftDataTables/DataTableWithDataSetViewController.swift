@@ -12,7 +12,7 @@ import SwiftDataTables
 class DataTableWithDataSetViewController: UIViewController {
     //MARK: - Properties
     lazy var dataTable = makeDataTable()
-
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +40,11 @@ extension DataTableWithDataSetViewController {
         var options = DataTableConfiguration()
         options.shouldContentWidthScaleToFillFrame = false
         options.defaultOrdering = DataTableColumnOrder(index: 1, order: .ascending)
+        options.headerFont = .systemFont(ofSize: 13, weight: .heavy)
         return options
     }
     func makeDataTable() -> SwiftDataTable {
+        
         let dataTable = SwiftDataTable(
             data: data(),
             headerTitles: columnHeaders(),
@@ -50,6 +52,8 @@ extension DataTableWithDataSetViewController {
         )
         dataTable.translatesAutoresizingMaskIntoConstraints = false
         dataTable.backgroundColor = UIColor.init(red: 235/255, green: 235/255, blue: 235/255, alpha: 1)
+        
+        dataTable.delegate = self
         return dataTable
     }
 }
@@ -58,9 +62,14 @@ extension DataTableWithDataSetViewController: SwiftDataTableDelegate {
     func didSelectItem(_ dataTable: SwiftDataTable, indexPath: IndexPath) {
         debugPrint("did select item at indexPath: \(indexPath) dataValue: \(dataTable.data(for: indexPath))")
     }
-    func fixedColumns(for dataTable: SwiftDataTable) -> DataTableFixedColumnType {
-        return .init(leftColumns: 1, rightColumns: 1)
+    //    func fixedColumns(for dataTable: SwiftDataTable) -> DataTableFixedColumnType {
+    //        return .init(leftColumns: 1, rightColumns: 1)
+    //    }
+    
+    func fontForCell(in: SwiftDataTable) -> UIFont {
+        return .systemFont(ofSize: 13)
     }
+    
 }
 extension DataTableWithDataSetViewController {
     func columnHeaders() -> [String] {

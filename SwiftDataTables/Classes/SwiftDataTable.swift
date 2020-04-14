@@ -313,7 +313,7 @@ public extension SwiftDataTable {
                 data: dataStructure.headerTitles[$0],
                 sortType: dataStructure.columnHeaderSortType(for: $0)
             )
-            headerViewModel.font = self.fontForHeader() //updated
+            headerViewModel.font = self.options.headerFont //updated
             headerViewModel.configure(dataTable: self, columnIndex: $0)
             return headerViewModel
         }
@@ -598,16 +598,6 @@ extension SwiftDataTable {
     
     func fontForCell() -> UIFont{
         return self.delegate?.fontForCell?(in: self) ?? self.options.cellFont
-    }
-    
-    func fontForHeader() -> UIFont{
-        let font = self.delegate?.fontForHeader?(in: self) ?? self.options.headerFont
-        if font == self.delegate?.fontForHeader?(in: self){
-            print("delegate working")
-        } else{
-            print("there's no delegate")
-        }
-        return self.delegate?.fontForHeader?(in: self) ?? self.options.headerFont
     }
     
     func shouldContentWidthScaleToFillFrame() -> Bool{

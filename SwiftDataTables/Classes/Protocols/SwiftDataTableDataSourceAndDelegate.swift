@@ -96,7 +96,6 @@ public protocol SwiftDataTableDataSource: class {
     /// - Returns: whether you wish to float section footer views.
     @objc optional func shouldSectionFootersFloat(in dataTable: SwiftDataTable) -> Bool
     
-    
     /// Search View floating. If set to true the search view can float and remain in view during scroll. Otherwise if set to false the search view will be fixed at the top and scroll off view along with the content.
     //  Defaults to true.
     ///
@@ -149,16 +148,10 @@ public protocol SwiftDataTableDataSource: class {
     /// - Returns: whether or not the horizontal scroll bars should be shown.
     @objc optional func shouldShowHorizontalScrollBars(in dataTable: SwiftDataTable) -> Bool
     
-    /// Control the font for headers.
-    ///
-    /// - Parameter dataTable: SwiftDataTable
-    /// - Returns: the font of the header
-    @objc optional func fontForHeader(in dataTable: SwiftDataTable) -> UIFont
-    
     /// Control the font for cells.
     ///
     /// - Parameter dataTable: SwiftDataTable
-    /// - Returns: the font of the header
+    /// - Returns: the font of the cell
     @objc optional func fontForCell(in dataTable: SwiftDataTable) -> UIFont
     
     /// Control the background color for cells in rows intersecting with a column that's highlighted.
