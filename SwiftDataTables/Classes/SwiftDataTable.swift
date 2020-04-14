@@ -601,7 +601,6 @@ extension SwiftDataTable {
     }
     
     func fontForHeader() -> UIFont{
-        let font = self.delegate?.fontForHeader?(in: self) ?? self.options.headerFont
         return self.delegate?.fontForHeader?(in: self) ?? self.options.headerFont
     }
     
