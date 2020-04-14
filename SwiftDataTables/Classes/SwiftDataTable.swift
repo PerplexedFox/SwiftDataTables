@@ -597,6 +597,12 @@ extension SwiftDataTable {
     }
     
     func fontForCell() -> UIFont{
+        let font = self.delegate?.fontForCell?(in: self) ?? self.options.cellFont
+        if font == self.delegate?.fontForCell?(in: self){
+            print("delegate working")
+        } else{
+            print("there's no delegate")
+        }
         return self.delegate?.fontForCell?(in: self) ?? self.options.cellFont
     }
     
