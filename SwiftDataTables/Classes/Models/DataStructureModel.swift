@@ -26,6 +26,7 @@ public struct DataStructureModel {
     var shouldFootersShowSortingElement: Bool = false
     
     private var columnAverageContentLength = [Float]()
+    private var columnMaximumContentLength = [Float]()
     
     //MARK: - Lifecycle
     init() {
@@ -51,6 +52,7 @@ public struct DataStructureModel {
         self.data = sanitisedData//sanitisedData
         self.shouldFitTitles = shouldMakeTitlesFitInColumn
         self.columnAverageContentLength = self.processColumnDataAverages(data: self.data)
+        self.columnMaximumContentLength = self.processColumnDataMaxima(data: self.data)
         
         if shouldDisplayFooterHeaders {
             self.footerTitles = headerTitles
@@ -69,6 +71,14 @@ public struct DataStructureModel {
         }
         return self.columnAverageContentLength[index]
     }
+    
+    public func maximumDataLengthForColumn(
+        index: Int) -> Float {
+        if self.shouldFitTitles {
+            return max(self.columnMaximumContentLength[index], Float(self.headerTitles[index].count))
+        }
+        return self.columnMaximumContentLength[index]
+    }
 
     //extension DataStructureModel {
     //Finds the average content length in each column
@@ -83,6 +93,19 @@ public struct DataStructureModel {
         }
         return columnContentAverages
     }
+    //finds maximum value of the column
+    private func processColumnDataMaxima(data: DataTableContent) -> [Float] {
+        var columnContentMax = [Float]()
+        for column in Array(0..<self.headerTitles.count) {
+            let maxForCurrentColumn = Array(0..<data.count).reduce(0){
+                let dataType: DataTableValueType = data[$1][column]
+                return max($0, dataType.stringRepresentation.count)
+            }
+            columnContentMax.append((data.count == 0) ? 1 : Float(maxForCurrentColumn))
+        }
+        return columnContentMax
+    }
+
     
     
     public func columnHeaderSortType(for index: Int) -> DataTableSortType {

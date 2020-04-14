@@ -669,7 +669,7 @@ extension SwiftDataTable {
         return 0
     }
     
-    
+    //TODO: - make it nicer
     /// Automatically calcualtes the width the column should be based on the content
     /// in the rows under the column.
     ///
@@ -677,11 +677,21 @@ extension SwiftDataTable {
     /// - Returns: The automatic width of the column irrespective of the Data Grid frame width
     func automaticWidthForColumn(index: Int) -> CGFloat {
         let columnAverage: CGFloat = CGFloat(dataStructure.averageDataLengthForColumn(index: index))
+        let columnMax : CGFloat = CGFloat(dataStructure.maximumDataLengthForColumn(index: index))
+
         var sortingArrowVisualElementWidth: CGFloat = 0 // This is ugly
         if index == 0{     //updated //for first column that is sorted
             sortingArrowVisualElementWidth = 20
         }
-        let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacterCell() + sortingArrowVisualElementWidth
+        //removes unnecessary space since font.pointSize is height and is greater than width
+        var multiple : CGFloat = 1 //updated
+        if columnMax < 20{}
+        else if columnMax < 30 {
+            multiple = 0.9
+        } else {
+            multiple = 0.8
+        }
+        let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacterCell() * multiple + sortingArrowVisualElementWidth
         return max(averageDataColumnWidth, max(self.minimumColumnWidth(), self.minimumHeaderColumnWidth(index: index)))
     }
     
@@ -694,23 +704,28 @@ extension SwiftDataTable {
         return 70
     }
     
+    //TODO: - make it nicer
     func minimumHeaderColumnWidth(index: Int) -> CGFloat {
-        if CGFloat(dataStructure.averageDataLengthForColumn(index: index)) <= 50{ //updated
-            return CGFloat(self.pixelsPerCharacterHeader() * CGFloat(self.dataStructure.headerTitles[index].count))+20
-        } else{
+        if index == 0 { //updated
+            return CGFloat(self.pixelsPerCharacterHeader() * 1.4 * CGFloat(self.dataStructure.headerTitles[index].count))+20
+        } else if self.dataStructure.headerTitles[index].count < 10{
         return CGFloat(self.pixelsPerCharacterHeader() * CGFloat(self.dataStructure.headerTitles[index].count))
+        } else if self.dataStructure.headerTitles[index].count < 20 {
+            return CGFloat(self.pixelsPerCharacterHeader() * 0.9 * CGFloat(self.dataStructure.headerTitles[index].count))
+        } else if self.dataStructure.headerTitles[index].count < 30 {
+        return CGFloat(self.pixelsPerCharacterHeader() * 0.8 * CGFloat(self.dataStructure.headerTitles[index].count))
+        } else{
+             return CGFloat(self.pixelsPerCharacterHeader() * 0.7 * CGFloat(self.dataStructure.headerTitles[index].count))
         }
     }
     
     //There should be an automated way to retrieve the font size of the cell
     func pixelsPerCharacterHeader() -> CGFloat {
-        let header = DataHeaderFooter()
-        return header.titleLabel.font.pointSize + header.titleLabel.font.pointSize * 0.4 //heavy
+        return options.headerFont.pointSize //+ header.titleLabel.font.pointSize * 0.4 //heavy
     }
     
     func pixelsPerCharacterCell() -> CGFloat {
-        let cell = DataCell()
-        return cell.dataLabel.font.pointSize
+        return fontForCell().pointSize
     }
     
     func heightForPaginationView() -> CGFloat {
