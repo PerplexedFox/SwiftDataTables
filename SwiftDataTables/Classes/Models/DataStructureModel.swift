@@ -67,7 +67,8 @@ public struct DataStructureModel {
     public func averageDataLengthForColumn(
         index: Int) -> Float {
         if self.shouldFitTitles {
-            return max(self.columnAverageContentLength[index], Float(self.headerTitles[index].count))
+      //updated      return max(self.columnAverageContentLength[index], Float(self.headerTitles[index].count))
+            return self.columnAverageContentLength[index]
         }
         return self.columnAverageContentLength[index]
     }

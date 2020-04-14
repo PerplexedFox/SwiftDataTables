@@ -73,14 +73,15 @@ extension DataTableWithDataSetViewController: SwiftDataTableDelegate {
 }
 extension DataTableWithDataSetViewController {
     func columnHeaders() -> [String] {
-        return [
-            "Id",
-            "Name",
-            "Email",
-            "Number",
-            "City",
-            "Balance"
-        ]
+//        return [
+//            "Id",
+//            "Name",
+//            "Email",
+//            "Number",
+//            "City",
+//            "Balance"
+//        ]
+        return ["time [s since Epoch]", "t-t0 in h", "F7", "F8", "Average Absorption", "Standard Deviation OD,  absolute ", "BTM, g/L", "Standard Deviation BTM, g/L"]
     }
     
     func data() -> [[DataTableValueType]]{

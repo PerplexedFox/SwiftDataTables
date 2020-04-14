@@ -681,17 +681,20 @@ extension SwiftDataTable {
 
         var sortingArrowVisualElementWidth: CGFloat = 0 // This is ugly
         if index == 0{     //updated //for first column that is sorted
-            sortingArrowVisualElementWidth = 20
+            sortingArrowVisualElementWidth = 10
         }
         //removes unnecessary space since font.pointSize is height and is greater than width
         var multiple : CGFloat = 1 //updated
-        if columnMax < 20{}
-        else if columnMax < 30 {
-            multiple = 0.9
-        } else {
-            multiple = 0.8
+        if columnMax < 15{}
+        else {
+            multiple = max(1 - (columnAverage - 15) * 0.02, 0.5)
         }
+        print(self.dataStructure.headerTitles[index], self.dataStructure.headerTitles[index].count)
+        print("ca", columnAverage)
         let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacterCell() * multiple + sortingArrowVisualElementWidth
+        print("average", averageDataColumnWidth)
+        print("minimum", self.minimumColumnWidth())
+        print("header", self.minimumHeaderColumnWidth(index: index), "\n")
         return max(averageDataColumnWidth, max(self.minimumColumnWidth(), self.minimumHeaderColumnWidth(index: index)))
     }
     
@@ -706,16 +709,21 @@ extension SwiftDataTable {
     
     //TODO: - make it nicer
     func minimumHeaderColumnWidth(index: Int) -> CGFloat {
-        if index == 0 { //updated
-            return CGFloat(self.pixelsPerCharacterHeader() * 1.4 * CGFloat(self.dataStructure.headerTitles[index].count))+20
-        } else if self.dataStructure.headerTitles[index].count < 10{
-        return CGFloat(self.pixelsPerCharacterHeader() * CGFloat(self.dataStructure.headerTitles[index].count))
-        } else if self.dataStructure.headerTitles[index].count < 20 {
-            return CGFloat(self.pixelsPerCharacterHeader() * 0.9 * CGFloat(self.dataStructure.headerTitles[index].count))
-        } else if self.dataStructure.headerTitles[index].count < 30 {
-        return CGFloat(self.pixelsPerCharacterHeader() * 0.8 * CGFloat(self.dataStructure.headerTitles[index].count))
+        var sortSpace: CGFloat = 20
+        if index != 0 {
+            sortSpace = 0
+        }
+        if self.dataStructure.headerTitles[index].count < 5{ //updated
+            return CGFloat(self.pixelsPerCharacterHeader() * 1.2 * CGFloat(self.dataStructure.headerTitles[index].count)+sortSpace)
         } else{
-             return CGFloat(self.pixelsPerCharacterHeader() * 0.7 * CGFloat(self.dataStructure.headerTitles[index].count))
+            let multiple = CGFloat(Double((self.dataStructure.headerTitles[index].count - 10)) * 0.03)
+            let width = CGFloat(self.pixelsPerCharacterHeader() * (1 - min(multiple, 0.5)) * CGFloat(self.dataStructure.headerTitles[index].count)+sortSpace)
+            if options.headerFont.pointSize < 15 && width > 200 && width < 400 { // to allow line wrapping
+                return 200
+            } else {
+                return width
+            }
+           // return CGFloat(self.pixelsPerCharacterHeader() * (1 - min(multiple, 0.5)) * CGFloat(self.dataStructure.headerTitles[index].count)+sortSpace)
         }
     }
     

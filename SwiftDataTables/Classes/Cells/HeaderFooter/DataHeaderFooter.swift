@@ -73,8 +73,11 @@ class DataHeaderFooter: UICollectionReusableView {
     
     func configure(viewModel: DataHeaderFooterViewModel, font: UIFont? = nil) { //updated
         if font != nil {
-        self.titleLabel.font = font
+            self.titleLabel.font = font
         }
+        //updated
+        self.titleLabel.numberOfLines = 2
+        self.titleLabel.lineBreakMode = .byWordWrapping
         
         self.titleLabel.text = viewModel.data
         self.sortingImageView.image = viewModel.imageForSortingElement
