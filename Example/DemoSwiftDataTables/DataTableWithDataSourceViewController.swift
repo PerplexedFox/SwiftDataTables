@@ -105,6 +105,9 @@ extension DataTableWithDataSourceViewController: SwiftDataTableDataSource {
     func fontForCell(in dataTable: SwiftDataTable) -> UIFont {
         return .systemFont(ofSize: 13)
     }
+    func fontForHeader(in dataTable: SwiftDataTable) -> UIFont {
+        return .systemFont(ofSize: 13, weight: .heavy)
+    }
 }
 
 extension DataTableWithDataSourceViewController: SwiftDataTableDelegate {
