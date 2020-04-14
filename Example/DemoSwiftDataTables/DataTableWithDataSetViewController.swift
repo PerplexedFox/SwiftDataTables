@@ -39,7 +39,7 @@ extension DataTableWithDataSetViewController {
     func makeOptions() -> DataTableConfiguration {
         var options = DataTableConfiguration()
         options.shouldContentWidthScaleToFillFrame = false
-        options.defaultOrdering = DataTableColumnOrder(index: 1, order: .ascending)
+        options.defaultOrdering = DataTableColumnOrder(index: 0, order: .ascending)
         options.headerFont = .systemFont(ofSize: 13, weight: .heavy)
         return options
     }
@@ -81,7 +81,8 @@ extension DataTableWithDataSetViewController {
 //            "City",
 //            "Balance"
 //        ]
-        return ["time [s since Epoch]", "t-t0 in h", "F7", "F8", "Average Absorption", "Standard Deviation OD,  absolute ", "BTM, g/L", "Standard Deviation BTM, g/L"]
+//        return ["time [s since Epoch]", "t-t0 in h", "F7", "F8", "Average Absorption", "Standard Deviation OD,  absolute ", "BTM, g/L", "Standard Deviation BTM, g/L"]
+        return ["Datum/Uhrzeit", "Durchschnittsverbrauch Strom (kWh/100km)", "Durchschnittsverbrauch Verbrenner (l/100km)", "Fahrstrecke (km)", "Fahrzeit (h)", "Durchschnittsgeschwindigkeit (km/h)"]
     }
     
     func data() -> [[DataTableValueType]]{

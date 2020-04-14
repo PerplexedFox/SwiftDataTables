@@ -32,6 +32,7 @@ class DataCell: UICollectionViewCell {
     }
     
     private func setup() {
+        dataLabel.adjustsFontSizeToFitWidth = true
         dataLabel.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(dataLabel)
         NSLayoutConstraint.activate([

@@ -679,21 +679,16 @@ extension SwiftDataTable {
         let columnAverage: CGFloat = CGFloat(dataStructure.averageDataLengthForColumn(index: index))
         let columnMax : CGFloat = CGFloat(dataStructure.maximumDataLengthForColumn(index: index))
 
-        var sortingArrowVisualElementWidth: CGFloat = 0 // This is ugly
-        if index == 0{     //updated //for first column that is sorted
-            sortingArrowVisualElementWidth = 10
-        }
         //removes unnecessary space since font.pointSize is height and is greater than width
         var multiple : CGFloat = 1 //updated
         if columnMax < 15{}
         else {
-            multiple = max(1 - (columnAverage - 15) * 0.02, 0.5)
+            multiple = max(1 - (2 * columnAverage - 15 - columnMax) * 0.038, 0.5)
         }
         print(self.dataStructure.headerTitles[index], self.dataStructure.headerTitles[index].count)
-        print("ca", columnAverage)
-        let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacterCell() * multiple + sortingArrowVisualElementWidth
+        print("ca", columnAverage, "multiple", multiple)
+        let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacterCell() * multiple
         print("average", averageDataColumnWidth)
-        print("minimum", self.minimumColumnWidth())
         print("header", self.minimumHeaderColumnWidth(index: index), "\n")
         return max(averageDataColumnWidth, max(self.minimumColumnWidth(), self.minimumHeaderColumnWidth(index: index)))
     }
