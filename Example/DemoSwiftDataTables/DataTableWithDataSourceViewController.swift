@@ -111,4 +111,20 @@ extension DataTableWithDataSourceViewController: SwiftDataTableDelegate {
     func didSelectItem(_ dataTable: SwiftDataTable, indexPath: IndexPath) {
         debugPrint("did select item at indexPath: \(indexPath) dataValue: \(dataTable.data(for: indexPath))")
     }
+    
+    
+       func dataTable(_ dataTable: SwiftDataTable, highlightedColorForRowIndex at: Int) -> UIColor {
+           if at.isMultiple(of: 2){
+               return .gray
+           } else{
+               return .white
+           }
+       }
+       func dataTable(_ dataTable: SwiftDataTable, unhighlightedColorForRowIndex at: Int) -> UIColor {
+           if at.isMultiple(of: 2){
+               return .lightGray
+           } else{
+               return .white
+           }
+       }
 }
