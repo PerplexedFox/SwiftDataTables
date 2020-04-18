@@ -85,7 +85,7 @@ class SwiftDataTableLayout: UICollectionViewFlowLayout {
         }
         self.calculateScrollBarIndicators()
         let timeLapsed = Date().timeIntervalSince(date)
-        debugPrint("\ntime lapsed: \(timeLapsed)\nfor \(self.cache.count) rows\n")
+       debugPrint("\ntime lapsed: \(timeLapsed)\n for \(self.cache.count) rows\n")
     }
     
     fileprivate func heightOfFooter() -> CGFloat {

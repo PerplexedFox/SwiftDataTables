@@ -685,11 +685,7 @@ extension SwiftDataTable {
         else {
             multiple = max(1 - (2 * columnAverage - 15 - columnMax) * 0.038, 0.5)
         }
-        print(self.dataStructure.headerTitles[index], self.dataStructure.headerTitles[index].count)
-        print("ca", columnAverage, "multiple", multiple)
         let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacterCell() * multiple
-        print("average", averageDataColumnWidth)
-        print("header", self.minimumHeaderColumnWidth(index: index), "\n")
         return max(averageDataColumnWidth, max(self.minimumColumnWidth(), self.minimumHeaderColumnWidth(index: index)))
     }
     
