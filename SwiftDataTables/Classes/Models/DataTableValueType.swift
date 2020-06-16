@@ -27,9 +27,9 @@ public enum DataTableValueType {
     
     //MARK: - Properties
     case string(String)
-    case int(Any)       //changed
-    case float(Any)
-    case double(Any)
+    case int(Any)       //changed int to any
+    case float(Any)     //changed float to any
+    case double(Any)    //changed double to any
 
     
     
@@ -102,17 +102,17 @@ extension DataTableValueType: Comparable {
         case (.string(let lhsValue), .string(let rhsValue)):
             return lhsValue < rhsValue
         case (.int(let lhsValue), .int(let rhsValue)):
-            let lhsV = lhsValue as! Int
-            let rhsV = rhsValue as! Int
-            return lhsV < rhsV
+            let lhsV = lhsValue as! Int     //new
+            let rhsV = rhsValue as! Int     //new
+            return lhsV < rhsV              //updated
         case (.float(let lhsValue), .float(let rhsValue)):
-            let lhsV = lhsValue as! Float
-            let rhsV = rhsValue as! Float
-            return lhsV < rhsV
+            let lhsV = lhsValue as! Float   //new
+            let rhsV = rhsValue as! Float   //new
+            return lhsV < rhsV              //updated
         case (.double(let lhsValue), .double(let rhsValue)):
-            let lhsV = lhsValue as! Double
-            let rhsV = rhsValue as! Double
-            return lhsV < rhsV
+            let lhsV = lhsValue as! Double  //new
+            let rhsV = rhsValue as! Double  //new
+            return lhsV < rhsV              //updated
         default:
             return lhs.stringRepresentation < rhs.stringRepresentation
         }
