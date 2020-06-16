@@ -11,27 +11,13 @@ import Foundation
 //MARK: - TODO: 11 march - TODO: See if you can make the multidimensional array a generic object so that it can accept any value type.
 //This will probably make sorting easier and could potenntially allow us to get rid of this class
 
-
-
-
-
-
-
-
-
-
-
-
 public enum DataTableValueType {
-    
     
     //MARK: - Properties
     case string(String)
-    case int(Any)       //changed int to any
-    case float(Any)     //changed float to any
-    case double(Any)    //changed double to any
-
-    
+    case int(Int)
+    case float(Float)
+    case double(Double)
     
     public var stringRepresentation: String {
         get {
@@ -39,32 +25,14 @@ public enum DataTableValueType {
             case .string(let value):
                 return String(value)
             case .int(let value):
-                let val = value as! String
-                return val
+                return String(value)
             case .float(let value):
-                let val = value as! String
-                return val
+                return String(value)
             case .double(let value):
-                let val = value as! String
-                return val
+                return String(value)
             }
         }
     }
-    
-//    public var stringRepresentation: String {
-//        get {
-//            switch self {
-//            case .string(let value):
-//                return String(value)
-//            case .int(let value):
-//                return String(value)
-//            case .float(let value):
-//                return String(value)
-//            case .double(let value):
-//                return String(value)
-//            }
-//        }
-//    }
     
     public init(_ value: Any){
         //Determine the actual type first
@@ -102,17 +70,11 @@ extension DataTableValueType: Comparable {
         case (.string(let lhsValue), .string(let rhsValue)):
             return lhsValue < rhsValue
         case (.int(let lhsValue), .int(let rhsValue)):
-            let lhsV = lhsValue as! Int     //new
-            let rhsV = rhsValue as! Int     //new
-            return lhsV < rhsV              //updated
+            return lhsValue < rhsValue
         case (.float(let lhsValue), .float(let rhsValue)):
-            let lhsV = lhsValue as! Float   //new
-            let rhsV = rhsValue as! Float   //new
-            return lhsV < rhsV              //updated
+            return lhsValue < rhsValue
         case (.double(let lhsValue), .double(let rhsValue)):
-            let lhsV = lhsValue as! Double  //new
-            let rhsV = rhsValue as! Double  //new
-            return lhsV < rhsV              //updated
+            return lhsValue < rhsValue
         default:
             return lhs.stringRepresentation < rhs.stringRepresentation
         }

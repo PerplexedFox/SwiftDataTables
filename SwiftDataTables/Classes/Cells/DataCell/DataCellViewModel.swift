@@ -23,6 +23,7 @@ open class DataCellViewModel: VirtualPositionTrackable, CollectionViewCellRepres
     public var stringRepresentation: String {
         return self.data.stringRepresentation
     }
+    
     //MARK: - Lifecycle
     init(data: DataTableValueType){
         self.data = data
