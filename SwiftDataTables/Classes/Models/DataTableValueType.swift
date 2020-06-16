@@ -18,6 +18,23 @@ public enum DataTableValueType {
     case int(Int)
     case float(Float)
     case double(Double)
+
+    
+    //new
+    public var absoluteString: String{
+        get{
+            switch self {
+            case .string(let value):
+                return String(value)
+            case .int(let value):
+                return String(value)
+            case .float(let value):
+                return String(value)
+            case .double(let value):
+                return String(value)
+            }
+        }
+    }
     
     public var stringRepresentation: String {
         get {
@@ -36,7 +53,12 @@ public enum DataTableValueType {
     
     public init(_ value: Any){
         //Determine the actual type first
+        
         switch value {
+            //new
+        case let value as String:
+            self = .string(value)
+            //str moved forward
         case let value as Int:
             self = .int(value)
         case let value as Float:

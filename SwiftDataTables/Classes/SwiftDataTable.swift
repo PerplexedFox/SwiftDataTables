@@ -299,6 +299,7 @@ public class SwiftDataTable: UIView {
     public func data(for indexPath: IndexPath) -> DataTableValueType {
         return rows[indexPath.section][indexPath.row].data
     }
+
 }
 
 public extension SwiftDataTable {
