@@ -24,6 +24,7 @@ open class DataCellViewModel: VirtualPositionTrackable, CollectionViewCellRepres
         return self.data.stringRepresentation
     }
     
+    
     //MARK: - Lifecycle
     init(data: DataTableValueType){
         self.data = data

@@ -15,21 +15,22 @@ public enum DataTableValueType {
     
     //MARK: - Properties
     case string(String)
-    case int(Int)
-    case float(Float)
-    case double(Double)
+    case int(Any)
+    case float(Any)
+    case double(Any)
+    
     
     public var stringRepresentation: String {
         get {
             switch self {
             case .string(let value):
-                return String(value)
+                return String(value)    //updated
             case .int(let value):
-                return String(value)
+                return String(value as! String)  //updated
             case .float(let value):
-                return String(value)
+                return String(value as! String)    //updated
             case .double(let value):
-                return String(value)
+                return String(value as! String)   //updated
             }
         }
     }
@@ -38,21 +39,24 @@ public enum DataTableValueType {
         //Determine the actual type first
         switch value {
         case let value as Int:
-            self = .int(value)
+            let str = String(value) //new
+            self = .int(str)    //updated
         case let value as Float:
-            self = .float(value)
+            let str = String(value)    //new
+            self = .float(str)  //updated
         case let value as Double:
-            self = .double(value)
+            let str = String(value) //new
+            self = .double(str) //updated
         default:
             let temporaryStringRepresentation = String(describing: value)
-            if let value = Int(temporaryStringRepresentation) {
-                self = .int(value)
+            if Int(temporaryStringRepresentation) != nil {  //updated
+                self = .int(temporaryStringRepresentation)  //updated
             }
-            else if let value = Float(temporaryStringRepresentation) {
-                self = .float(value)
+            else if Float(temporaryStringRepresentation) != nil {   //updated
+                self = .float(temporaryStringRepresentation)    //updated
             }
-            else if let value = Double(temporaryStringRepresentation) {
-                self = .double(value)
+            else if Double(temporaryStringRepresentation) != nil {  //updated
+                self = .double(temporaryStringRepresentation)   //updated
             }
             else {
                 self = .string(temporaryStringRepresentation)
@@ -70,11 +74,17 @@ extension DataTableValueType: Comparable {
         case (.string(let lhsValue), .string(let rhsValue)):
             return lhsValue < rhsValue
         case (.int(let lhsValue), .int(let rhsValue)):
-            return lhsValue < rhsValue
+            let lhsV = Int(lhsValue as! String)!       //new
+            let rhsV = Int(rhsValue as! String)!       //new
+            return lhsV < rhsV              //updated
         case (.float(let lhsValue), .float(let rhsValue)):
-            return lhsValue < rhsValue
+            let lhsV = Float(lhsValue as! String)!       //new
+            let rhsV = Float(rhsValue as! String)!       //new
+            return lhsV < rhsV                //updated
         case (.double(let lhsValue), .double(let rhsValue)):
-            return lhsValue < rhsValue
+            let lhsV = Double(lhsValue as! String)!       //new
+            let rhsV = Double(rhsValue as! String)!       //new
+            return lhsV < rhsV                 //updated
         default:
             return lhs.stringRepresentation < rhs.stringRepresentation
         }
