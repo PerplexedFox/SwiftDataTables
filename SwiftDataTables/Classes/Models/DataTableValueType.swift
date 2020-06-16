@@ -11,30 +11,27 @@ import Foundation
 //MARK: - TODO: 11 march - TODO: See if you can make the multidimensional array a generic object so that it can accept any value type.
 //This will probably make sorting easier and could potenntially allow us to get rid of this class
 
+
+
+
+
+
+
+
+
+
+
+
 public enum DataTableValueType {
+    
     
     //MARK: - Properties
     case string(String)
-    case int(Int)
-    case float(Float)
-    case double(Double)
+    case int(Any)       //changed
+    case float(Any)
+    case double(Any)
 
     
-    //new
-    public var absoluteString: String{
-        get{
-            switch self {
-            case .string(let value):
-                return String(value)
-            case .int(let value):
-                return String(value)
-            case .float(let value):
-                return String(value)
-            case .double(let value):
-                return String(value)
-            }
-        }
-    }
     
     public var stringRepresentation: String {
         get {
@@ -42,23 +39,36 @@ public enum DataTableValueType {
             case .string(let value):
                 return String(value)
             case .int(let value):
-                return String(value)
+                let val = value as! String
+                return val
             case .float(let value):
-                return String(value)
+                let val = value as! String
+                return val
             case .double(let value):
-                return String(value)
+                let val = value as! String
+                return val
             }
         }
     }
     
+//    public var stringRepresentation: String {
+//        get {
+//            switch self {
+//            case .string(let value):
+//                return String(value)
+//            case .int(let value):
+//                return String(value)
+//            case .float(let value):
+//                return String(value)
+//            case .double(let value):
+//                return String(value)
+//            }
+//        }
+//    }
+    
     public init(_ value: Any){
         //Determine the actual type first
-        
         switch value {
-            //new
-        case let value as String:
-            self = .string(value)
-            //str moved forward
         case let value as Int:
             self = .int(value)
         case let value as Float:
@@ -92,11 +102,17 @@ extension DataTableValueType: Comparable {
         case (.string(let lhsValue), .string(let rhsValue)):
             return lhsValue < rhsValue
         case (.int(let lhsValue), .int(let rhsValue)):
-            return lhsValue < rhsValue
+            let lhsV = lhsValue as! Int
+            let rhsV = rhsValue as! Int
+            return lhsV < rhsV
         case (.float(let lhsValue), .float(let rhsValue)):
-            return lhsValue < rhsValue
+            let lhsV = lhsValue as! Float
+            let rhsV = rhsValue as! Float
+            return lhsV < rhsV
         case (.double(let lhsValue), .double(let rhsValue)):
-            return lhsValue < rhsValue
+            let lhsV = lhsValue as! Double
+            let rhsV = rhsValue as! Double
+            return lhsV < rhsV
         default:
             return lhs.stringRepresentation < rhs.stringRepresentation
         }

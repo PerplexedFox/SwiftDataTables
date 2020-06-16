@@ -20,10 +20,6 @@ open class DataCellViewModel: VirtualPositionTrackable, CollectionViewCellRepres
     //
     var font: UIFont? = nil
     
-    public var absoluteString: String{
-        return self.data.absoluteString
-    }
-    
     public var stringRepresentation: String {
         return self.data.stringRepresentation
     }
