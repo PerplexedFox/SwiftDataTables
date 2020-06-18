@@ -154,8 +154,10 @@ public class SwiftDataTable: UIView {
         super.init(frame: frame)
         
         if #available(iOS 12.0, *) {
-            self.layer.borderWidth = 2
-            self.layer.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+            let bottomLine = CALayer()
+            bottomLine.frame = CGRect(x: 0.0, y: self.frame.height, width: self.frame.width, height: 1.0)
+            bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+            self.layer.addSublayer(bottomLine)
         } else {
             // Fallback on earlier versions
             //do nothing
@@ -178,8 +180,10 @@ public class SwiftDataTable: UIView {
         self.registerObservers()
         
         if #available(iOS 12.0, *) {
-            self.layer.borderWidth = 2
-            self.layer.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+            let bottomLine = CALayer()
+            bottomLine.frame = CGRect(x: 0.0, y: self.frame.height, width: self.frame.width, height: 1.0)
+            bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+            self.layer.addSublayer(bottomLine)
         } else {
             // Fallback on earlier versions
             //do nothing
@@ -200,12 +204,15 @@ public class SwiftDataTable: UIView {
         )
         
         if #available(iOS 12.0, *) {
-            self.layer.borderWidth = 2
-            self.layer.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+            let bottomLine = CALayer()
+                   bottomLine.frame = CGRect(x: 0.0, y: self.frame.height, width: self.frame.width, height: 1.0)
+            bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+            self.layer.addSublayer(bottomLine)
         } else {
             // Fallback on earlier versions
             //do nothing
         }
+        
     }
     
     required public init?(coder aDecoder: NSCoder) {
