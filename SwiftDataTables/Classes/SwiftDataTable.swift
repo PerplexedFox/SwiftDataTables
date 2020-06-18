@@ -58,8 +58,13 @@ public class SwiftDataTable: UIView {
         searchBar.searchBarStyle = .minimal;
         searchBar.placeholder = "Search";
         searchBar.delegate = self
-        searchBar.backgroundColor = .white
-        searchBar.barTintColor = UIColor.white
+        if #available(iOS 12.0, *) {
+            searchBar.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white : UIColor.black
+            searchBar.barTintColor = traitCollection.userInterfaceStyle == .light ? UIColor.white : UIColor.black
+        } else {
+            searchBar.backgroundColor = .white
+            searchBar.barTintColor = UIColor.white
+        }
         self.addSubview(searchBar)
         return searchBar
     }()
@@ -402,7 +407,12 @@ extension SwiftDataTable: UICollectionViewDataSource, UICollectionViewDelegate {
         case .paginationHeader:
             view.backgroundColor = UIColor.darkGray
         default:
-            view.backgroundColor = UIColor.white
+            if #available(iOS 12.0, *) {
+                view.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white : UIColor.black
+            } else {
+                // Fallback on earlier versions
+                view.backgroundColor = .white
+            }
         }
     }
     public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
