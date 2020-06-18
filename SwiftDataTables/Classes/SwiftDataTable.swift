@@ -177,6 +177,14 @@ public class SwiftDataTable: UIView {
         self.set(data: data, headerTitles: headerTitles, options: options, shouldReplaceLayout: true)
         self.registerObservers()
         
+        if #available(iOS 12.0, *) {
+            self.layer.borderWidth = 2
+            self.layer.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+        } else {
+            // Fallback on earlier versions
+            //do nothing
+        }
+        
         
     }
     public convenience init(data: [[String]],
@@ -190,6 +198,14 @@ public class SwiftDataTable: UIView {
             options: options,
             frame: frame
         )
+        
+        if #available(iOS 12.0, *) {
+            self.layer.borderWidth = 2
+            self.layer.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+        } else {
+            // Fallback on earlier versions
+            //do nothing
+        }
     }
     
     required public init?(coder aDecoder: NSCoder) {
