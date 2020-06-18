@@ -150,7 +150,17 @@ public class SwiftDataTable: UIView {
                 options: DataTableConfiguration? = DataTableConfiguration(),
                 frame: CGRect = .zero){
         self.options = options!
+        
         super.init(frame: frame)
+        
+        if #available(iOS 12.0, *) {
+            self.layer.borderWidth = 2
+            self.layer.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+        } else {
+            // Fallback on earlier versions
+            //do nothing
+        }
+        
         self.dataSource = dataSource
         
         self.set(options: options)
