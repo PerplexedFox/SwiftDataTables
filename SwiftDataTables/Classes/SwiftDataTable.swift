@@ -153,16 +153,6 @@ public class SwiftDataTable: UIView {
         
         super.init(frame: frame)
         
-        if #available(iOS 12.0, *) {
-            let bottomLine = CALayer()
-            bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
-            bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
-            self.layer.addSublayer(bottomLine)
-        } else {
-            // Fallback on earlier versions
-            //do nothing
-        }
-        
         self.dataSource = dataSource
         
         self.set(options: options)
@@ -179,17 +169,6 @@ public class SwiftDataTable: UIView {
         self.set(data: data, headerTitles: headerTitles, options: options, shouldReplaceLayout: true)
         self.registerObservers()
         
-        if #available(iOS 12.0, *) {
-            let bottomLine = CALayer()
-            bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
-            bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
-            self.layer.addSublayer(bottomLine)
-        } else {
-            // Fallback on earlier versions
-            //do nothing
-        }
-        
-        
     }
     public convenience init(data: [[String]],
                             headerTitles: [String],
@@ -202,17 +181,6 @@ public class SwiftDataTable: UIView {
             options: options,
             frame: frame
         )
-        
-        if #available(iOS 12.0, *) {
-            let bottomLine = CALayer()
-                   bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
-            bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
-            self.layer.addSublayer(bottomLine)
-        } else {
-            // Fallback on earlier versions
-            //do nothing
-        }
-        
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -229,6 +197,16 @@ public class SwiftDataTable: UIView {
         let searchBarHeight = self.heightForSearchView()
         self.searchBar.frame = CGRect(x: 0, y: 0, width: self.bounds.width, height: searchBarHeight)
         self.collectionView.frame = CGRect(x: 0, y: searchBarHeight, width: self.bounds.width, height: self.bounds.height-searchBarHeight)
+        
+        if #available(iOS 12.0, *) {
+            let bottomLine = CALayer()
+            bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
+            bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+            self.layer.addSublayer(bottomLine)
+                 } else {
+                     // Fallback on earlier versions
+                     //do nothing
+                 }
     }
     
     func registerObservers(){

@@ -21,6 +21,7 @@ class DataTableSearchTextField: UITextField {
     
     public func setup(){
         self.borderStyle = .none
+
         if #available(iOS 12.0, *) {
             self.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white : UIColor.black
         } else {
