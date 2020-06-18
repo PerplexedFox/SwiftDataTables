@@ -155,7 +155,7 @@ public class SwiftDataTable: UIView {
         
         if #available(iOS 12.0, *) {
             let bottomLine = CALayer()
-            bottomLine.frame = CGRect(x: 0.0, y: self.frame.height, width: self.frame.width, height: 1.0)
+            bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
             bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
             self.layer.addSublayer(bottomLine)
         } else {
@@ -181,7 +181,7 @@ public class SwiftDataTable: UIView {
         
         if #available(iOS 12.0, *) {
             let bottomLine = CALayer()
-            bottomLine.frame = CGRect(x: 0.0, y: self.frame.height, width: self.frame.width, height: 1.0)
+            bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
             bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
             self.layer.addSublayer(bottomLine)
         } else {
@@ -205,7 +205,7 @@ public class SwiftDataTable: UIView {
         
         if #available(iOS 12.0, *) {
             let bottomLine = CALayer()
-                   bottomLine.frame = CGRect(x: 0.0, y: self.frame.height, width: self.frame.width, height: 1.0)
+                   bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
             bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
             self.layer.addSublayer(bottomLine)
         } else {
