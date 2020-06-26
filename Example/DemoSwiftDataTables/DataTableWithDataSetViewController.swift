@@ -83,7 +83,7 @@ extension DataTableWithDataSetViewController {
 //        ]
 //        return ["time [s since Epoch]", "t-t0 in h", "F7", "F8", "Average Absorption", "Standard Deviation OD,  absolute ", "BTM, g/L", "Standard Deviation BTM, g/L"]
         return ["Datum/Uhrzeit",
-                "Durchschnittsverbrauch Strom (kWh/100km)", "Durchschnittsverbrauch Verbrenner (l/100km)", "Fahrstrecke (km)", "Fahrzeit (h)", "Durchschnittsgeschwindigkeit (km/h)"]
+                "Durchschnittsverbrauch Strom (kWh/100km)", "Durchschnittsverbrauch Verbrenner (l/100km)", "Fahrstrecke (km)", "Fahrzeit (h)", "Durchschnittsgeschwindigkeit (km/h)", "Comment"]
     }
     
     func data() -> [[DataTableValueType]]{

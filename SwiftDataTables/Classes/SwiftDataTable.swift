@@ -201,7 +201,12 @@ public class SwiftDataTable: UIView {
         if #available(iOS 12.0, *) {
             let bottomLine = CALayer()
             bottomLine.frame = CGRect(x: 0.0, y: self.frame.height - 1, width: self.frame.width, height: 1.0)
-            bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.black.cgColor
+            if #available(iOS 13.0, *) {
+                bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor.systemGray6.cgColor
+            } else {
+                // Fallback on earlier versions
+                bottomLine.backgroundColor = traitCollection.userInterfaceStyle == .light ? UIColor.white.cgColor : UIColor(red: 28/255, green: 28/255, blue: 30/255, alpha: 1).cgColor
+            }
             self.layer.addSublayer(bottomLine)
                  } else {
                      // Fallback on earlier versions
@@ -708,7 +713,24 @@ extension SwiftDataTable {
             multiple = max(1 - (2 * columnAverage - 15 - columnMax) * 0.038, 0.5)
         }
         let averageDataColumnWidth: CGFloat = columnAverage * self.pixelsPerCharacterCell() * multiple
+        
+        //for max String
+        let attributes: [NSAttributedString.Key: Any] = [.font: fontForCell()]
+        let string = randomString(length: Int(columnMax))
+        let constraintRect = CGSize(width: .greatestFiniteMagnitude, height: pixelsPerCharacterCell())
+        let boundingBox = string.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        let maxWidth = ceil(boundingBox.width)
+       
+        if index < self.dataStructure.headerTitles.count - 1{
         return max(averageDataColumnWidth, max(self.minimumColumnWidth(), self.minimumHeaderColumnWidth(index: index)))
+        } else{
+            return maxWidth
+        }
+    }
+    
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
     func calculateContentWidth() -> CGFloat {
@@ -728,7 +750,10 @@ extension SwiftDataTable {
         }
         if self.dataStructure.headerTitles[index].count < 5{ //updated
             return CGFloat(self.pixelsPerCharacterHeader() * 1.2 * CGFloat(self.dataStructure.headerTitles[index].count)+sortSpace)
-        } else{
+        }else if  self.dataStructure.headerTitles[index].count < 10{
+            let multiple = CGFloat(Double((self.dataStructure.headerTitles[index].count - 15)) * 0.03)
+            return CGFloat(self.pixelsPerCharacterHeader() * (1 - min(multiple, 0.5)) * CGFloat(self.dataStructure.headerTitles[index].count)+sortSpace)
+        }else{
             let multiple = CGFloat(Double((self.dataStructure.headerTitles[index].count - 10)) * 0.03)
             let width = CGFloat(self.pixelsPerCharacterHeader() * (1 - min(multiple, 0.5)) * CGFloat(self.dataStructure.headerTitles[index].count)+sortSpace)
             if options.headerFont.pointSize < 15 && width > 200 && width < 400 { // to allow line wrapping
