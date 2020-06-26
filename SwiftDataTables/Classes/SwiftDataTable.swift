@@ -724,7 +724,7 @@ extension SwiftDataTable {
         if index < self.dataStructure.headerTitles.count - 1{
         return max(averageDataColumnWidth, max(self.minimumColumnWidth(), self.minimumHeaderColumnWidth(index: index)))
         } else{
-            return maxWidth
+            return max(maxWidth,max(self.minimumColumnWidth(), self.minimumHeaderColumnWidth(index: index)))
         }
     }
     
